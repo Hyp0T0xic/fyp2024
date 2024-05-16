@@ -5,11 +5,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import cv2
+from PIL import Image
+
 #Insert the path to your image and your mask. 
 #If the mask is a png file, use the png_to_numpy_array function
 
-image_path=""
-mask_path=""
+image_path= ""
+mask_path= ""
 
 def png_to_numpy_array(file_path):
     # Open the image file
@@ -47,7 +49,7 @@ def classify(img, mask, img_for_veil):
     x_processed = np.array(features_df[ordinal_features + binary_features])
     
     # Load the trained classifier
-    classifier = pickle.load(open('groupE_classifier.sav', 'rb'))
+    classifier = pickle.load(open('Data/groupE_classifier.sav', 'rb'))
     
     # Use it on this example to predict the label AND posterior probability
     pred_label = classifier.predict(x_processed)
@@ -55,3 +57,4 @@ def classify(img, mask, img_for_veil):
     
     return pred_label, pred_prob
 
+print(classify(image,mask,image_for_veil))
